@@ -1,0 +1,11 @@
+@(userForm: Form[UserSession])(implicit request:Request[AnyContent])
+@import helper._
+
+@application("Welcome to Play 2.0", None) {
+    <h2>Login</h2>
+    @helper.form(action = routes.Session.create) {
+        @helper.inputText(userForm("username"))
+        @helper.inputText(userForm("password"))
+        <input type="submit" class="btn primary" value="Login">
+    }
+}

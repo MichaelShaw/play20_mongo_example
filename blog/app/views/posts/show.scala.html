@@ -1,0 +1,25 @@
+@(post: (Post), commentForm: Form[Comment])(implicit request: AuthenticatedRequest)
+
+@application("Show", Some(request.user)) {
+    <h1>@post.title</h1>
+    <p>@post.content</p>
+    @if(post.comments.length > 0) {
+        <h4>Comments</h4>
+    }
+    @for(c <- post.comments) {
+        <div class="comment">
+            <p>@c.content</p>
+            by @c.author.get.username
+        </div>
+    }
+
+    <div>
+        <h3>New Comment</h3>
+        @helper.form(action = routes.Comments.create(post.id)) {
+            @helper.inputText(commentForm("content"))
+            <input type="submit" class="btn primary" value="Create">
+        }
+    </div>
+
+}
+

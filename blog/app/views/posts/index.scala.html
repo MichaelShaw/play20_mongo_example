@@ -1,0 +1,15 @@
+@(posts: Iterator[Post], message:String = "")(implicit request: AuthenticatedRequest)
+
+@application("Posts index", Some(request.user)) {
+  <h1>Posts</h1>
+  <ul>
+      @for(p <- posts) {
+        <article class="post">
+            <h4><a href="@routes.Posts.show(p.id)">@p.title</a> (by @p.author.get.username)</h4>
+            <p>@p.comments.length comments</p>
+            <a href="@routes.Posts.edit(p.id)" class="btn">edit</a>
+            <a href="@routes.Posts.destroy(p.id)" class="btn">destroy</a>
+        </article>
+      }
+  </ul>
+}

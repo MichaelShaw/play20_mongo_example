@@ -1,0 +1,13 @@
+@(post:Post, postForm: Form[Post])(implicit request: AuthenticatedRequest)
+
+@import helper._
+@import controllers.AuthenticatedRequest
+
+@application("Edit post", Some(request.user)) {
+    <h2>Edit Post</h2>
+    @helper.form(action = routes.Posts.update(post.id)) {
+        @helper.inputText(postForm("title"))
+        @helper.inputText(postForm("content"))
+        <input type="submit" class="btn primary" value="Save">
+    }
+}

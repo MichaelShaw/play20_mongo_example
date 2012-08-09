@@ -1,0 +1,11 @@
+@(postForm: Form[Post])(implicit request: AuthenticatedRequest)
+@import helper._
+
+@application("New Post", Some(request.user)) {
+    <h2>New Post</h2>
+    @helper.form(action = routes.Posts.create) {
+        @helper.inputText(postForm("title"))
+        @helper.inputText(postForm("content"))
+        <input type="submit" class="btn primary" value="Create">
+    }
+}
